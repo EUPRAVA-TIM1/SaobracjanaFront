@@ -1,4 +1,4 @@
-import { Commponent } from "./commponent"
+import { Commponent } from "./interfaces"
 
 export const allCommponents : Commponent[] = [
     {
@@ -42,12 +42,16 @@ export const gradjajninCommponents : Commponent[] = [
     {
         title: "Moji nalozi",
         desc: "Pregledajte sve prekršajne naloge koji su napisani na vaše ime",
-        url: ""
+        url: "/MojiNalozi"
     },
     {
         title: "Policijske stanice",
         desc: "Pogledajte sve aktivne policjske stanice u zemlji",
-        url: ""
+        url: "/Stanice"
     },
 ]
+
+export const backed_url = "http://localhost:8002/saobracajna/"
+
+export const storageKey = "milicija-token"
 

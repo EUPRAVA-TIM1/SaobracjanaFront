@@ -2,6 +2,7 @@ import React from 'react'
 import useLocalStorage from '../Hooks/useLocalStorageHook'
 import { useEffect } from 'react'
 import { useParams,useNavigate } from "react-router-dom";
+import { storageKey } from '../Data/data.ts';
 
 function RedirectPage() {
     // TODO validate token
@@ -10,7 +11,7 @@ function RedirectPage() {
 
     useEffect(() => {
         if(jwt && jwt != undefined){
-            localStorage.setItem("milicija-token",jwt)
+            localStorage.setItem(storageKey,jwt)
             navigate("/Home")
         }else{
             window.location.replace("http://localhost:3000")

@@ -3,6 +3,8 @@ import HomePage from './Pages/HomePage.tsx';
 import NavLayout from './Pages/NavLayout.tsx';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RedirectPage from './Pages/RedirectPage.tsx';
+import StanicePage from './Pages/StanicePage.tsx';
+import MojiNalozi from './Pages/MojiNalozi.tsx';
 
 function App() {
   return (
@@ -15,6 +17,15 @@ function App() {
         <Route
           path='/Home'
           element={<NavLayout body={<HomePage></HomePage>} />}>
+        </Route>
+        <Route
+          path='/Stanice'
+          element={<NavLayout body={<StanicePage></StanicePage>} />}>
+        </Route>
+        <Route
+        path='/MojiNalozi'
+        element={<NavLayout body={<MojiNalozi></MojiNalozi>}></NavLayout>}
+        >
         </Route>
         <Route
           path="/redirekcija/:jwt"
