@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { backed_url ,storageKey} from '../Data/data.ts'
+import { backend_url ,storageKey} from '../Data/data.ts'
 import { Stanica } from '../Data/interfaces'
 import StanicaCard from '../Components/StanicaCard.tsx'
 
 function StanicePage() {
     const [stanice, setStanice] = useState<Stanica[]>([])
     useEffect(() => {
-        axios.get(backed_url + "Stanice",{headers: {
+        axios.get(backend_url + "Stanice",{headers: {
             'Authorization' : 'Bearer ' + localStorage.getItem(storageKey)
           }}).then(res => {
             setStanice(res.data)

@@ -4,32 +4,32 @@ export const allCommponents : Commponent[] = [
     {
         title: "Provera dokumenta",
         desc: "Proverite dokumenta lica",
-        url: ""
+        url: "/ProveraMup"
     },
     {
         title: "Provera u sudu",
         desc: "Proverite da li se vrši sudski postupak protiv lica",
-        url: ""
+        url: "/ProveraSud"
     },
     {
         title: "Izdavanje prekršajnih naloga",
         desc: "Izdajte novi prekršajni nalog",
-        url: ""
+        url: "/IzdajNalog"
     },
     {
         title: "Prosledi nalog sudu",
         desc: "Prosledite prekršajni nalog sudu",
-        url: ""
+        url: "/ProslediNalog"
     },
     {
         title: "Izdati nalozi",
         desc: "Pregledajte sve prekršajne naloge koje ste izdali",
-        url: ""
+        url: "/IzdatiNaloz"
     },
     {
         title: "Status prosleđenih naloga",
         desc: "Pogledajte status vaših naloga u sudu",
-        url: ""
+        url: "/StatusNaloga"
     },
 ]
 
@@ -37,7 +37,7 @@ export const gradjajninCommponents : Commponent[] = [
     {
         title: "Prijava krađe vozila",
         desc: "Prijavite krađu vozila",
-        url: ""
+        url: "/PrijaviKradju"
     },
     {
         title: "Moji nalozi",
@@ -51,7 +51,7 @@ export const gradjajninCommponents : Commponent[] = [
     },
 ]
 
-export const backed_url = "http://localhost:8002/saobracajna/"
+export const backend_url = "http://localhost:8002/saobracajna/"
 
 export const storageKey = "milicija-token"
 

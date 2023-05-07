@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react'
 import jwtDecode from "jwt-decode";
 import { PrekrsajniNalog, opisiKrivica } from '../Data/interfaces.ts';
 import axios from 'axios';
-import { backed_url, storageKey } from '../Data/data.ts';
+import { backend_url, storageKey } from '../Data/data.ts';
 
 function MojiNalozi() {
 
     const [nalozi, setNalozi] = useState<PrekrsajniNalog[]>([])
     useEffect(() => {
-        const jmbg = jwtDecode(localStorage.getItem(storageKey)!).sub
-        axios.get(`${backed_url + "Gradjanin/Nalozi/" + jmbg}`,{headers: {
+        const jmbg = jwtDecode(localStorage.getItem(storageKey)!).sub 
+        axios.get(`${backend_url + "Gradjanin/Nalozi/" + jmbg}`,{headers: {
             'Authorization' : 'Bearer ' + localStorage.getItem(storageKey)
           }}).then(res => {
             setNalozi(res.data)

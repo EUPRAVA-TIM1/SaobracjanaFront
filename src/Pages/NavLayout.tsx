@@ -2,14 +2,14 @@ import React,{useEffect} from 'react'
 import logo from '../img/PolicijaLogo.png'
 import { useNavigate,useLocation } from 'react-router-dom'
 import axios from 'axios';
-import {backed_url,storageKey} from '../Data/data.ts'
+import {backend_url,storageKey} from '../Data/data.ts'
 
 function NavLayout({ body,employeeRestricted }) {
   const location = useLocation();
 
   useEffect( () =>{
     let canAcess;
-    axios.get(backed_url + '/Authorise', {headers: {
+    axios.get(backend_url + '/Authorise', {headers: {
       'Authorization' : 'Bearer ' + localStorage.getItem(storageKey)
     }}).then(res => {
       canAcess = true
@@ -18,7 +18,7 @@ function NavLayout({ body,employeeRestricted }) {
         window.location.replace("http://localhost:3000")  
     })
     if(employeeRestricted){
-      axios.get(backed_url + 'Policajac/Authorise', {headers: {
+      axios.get(backend_url + 'Policajac/Authorise', {headers: {
         'Authorization' : 'Bearer ' + localStorage.getItem(storageKey)
       }}).then(res => {
         if(!canAcess){
@@ -26,8 +26,12 @@ function NavLayout({ body,employeeRestricted }) {
           window.location.replace("http://localhost:3000")  
         }
       }).catch( err => {
+        if(!canAcess){
           localStorage.removeItem(storageKey)
           window.location.replace("http://localhost:3000")  
+        }else{
+          navigate("/Home")
+        }
       })
     }
   },[location])
