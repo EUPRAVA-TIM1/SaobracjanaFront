@@ -20,7 +20,7 @@ function App() {
         </Route>
         <Route
           path='/Stanice'
-          element={<NavLayout body={<StanicePage></StanicePage>} />}>
+          element={<NavLayout body={<StanicePage></StanicePage>} employeeRestricted={true}/>}>
         </Route>
         <Route
         path='/MojiNalozi'

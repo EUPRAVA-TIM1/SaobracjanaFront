@@ -1,10 +1,39 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import logo from '../img/PolicijaLogo.png'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,useLocation } from 'react-router-dom'
+import axios from 'axios';
+import {backed_url,storageKey} from '../Data/data.ts'
 
-function NavLayout({ body }) {
+function NavLayout({ body,employeeRestricted }) {
+  const location = useLocation();
+
+  useEffect( () =>{
+    let canAcess;
+    axios.get(backed_url + '/Authorise', {headers: {
+      'Authorization' : 'Bearer ' + localStorage.getItem(storageKey)
+    }}).then(res => {
+      canAcess = true
+    }).catch(err => {
+        localStorage.removeItem(storageKey)
+        window.location.replace("http://localhost:3000")  
+    })
+    if(employeeRestricted){
+      axios.get(backed_url + 'Policajac/Authorise', {headers: {
+        'Authorization' : 'Bearer ' + localStorage.getItem(storageKey)
+      }}).then(res => {
+        if(!canAcess){
+          localStorage.removeItem(storageKey)
+          window.location.replace("http://localhost:3000")  
+        }
+      }).catch( err => {
+          localStorage.removeItem(storageKey)
+          window.location.replace("http://localhost:3000")  
+      })
+    }
+  },[location])
+
   const logOut= () => {
-    localStorage.removeItem("milicija-token")
+    localStorage.removeItem(storageKey)
     window.location.replace("http://localhost:3000")
   }
 

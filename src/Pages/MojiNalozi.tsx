@@ -9,12 +9,14 @@ function MojiNalozi() {
     const [nalozi, setNalozi] = useState<PrekrsajniNalog[]>([])
     useEffect(() => {
         const jmbg = jwtDecode(localStorage.getItem(storageKey)!).sub
-        axios.get(`${backed_url + "Gradjanin/Nalozi/" + jmbg}`).then(res => {
+        axios.get(`${backed_url + "Gradjanin/Nalozi/" + jmbg}`,{headers: {
+            'Authorization' : 'Bearer ' + localStorage.getItem(storageKey)
+          }}).then(res => {
             setNalozi(res.data)
         }).catch(err => {
             console.log(err)
         })
-    })
+    },[])
 
     return (
         <>
