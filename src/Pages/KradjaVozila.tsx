@@ -16,13 +16,13 @@ function KradjaVozila() {
             brojRegistracije: getValues("brojRegistracije"),
             JMBGVlasnika: getValues("JMBGVlasnika")
         }
-        axios.post(backend_url + "KradjaVozila",  dto , {
+        axios.post(backend_url + "KradjaVozila", dto, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem(storageKey)
             }
-        }).then(res =>{
+        }).then(res => {
             navigate("/Home")
-        }).catch(err =>{
+        }).catch(err => {
             alert("Postoji problem pri slanju prijave, molimo vas da pokušate ponovo kasnije")
         })
     }

@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react'
 import jwtDecode from "jwt-decode";
 import { PrekrsajniNalog, opisiKrivica } from '../Data/interfaces.ts';
 import axios from 'axios';
-import { backend_url, file_service_url, storageKey } from '../Data/data.ts';
+import { file_service_url, backend_url, storageKey } from '../Data/data.ts';
 
-function MojiNalozi() {
+function IzdatiNalozi() {
+
 
     const [nalozi, setNalozi] = useState<PrekrsajniNalog[]>([])
     useEffect(() => {
         const jmbg = jwtDecode(localStorage.getItem(storageKey)!).sub
-        axios.get(`${backend_url + "Gradjanin/Nalozi/" + jmbg}`, {
+        axios.get(`${backend_url + "Policajac/Nalozi/" + jmbg}`, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem(storageKey)
             }
@@ -28,7 +29,7 @@ function MojiNalozi() {
                     <tr>
                         <th>Datum</th>
                         <th>Opis</th>
-                        <th>Izdao/la</th>
+                        <th>Izdato za:</th>
                         <th>Tip prekršaja</th>
                         <th>Jedinica mere</th>
                         <th>Vrednost</th>
@@ -41,7 +42,7 @@ function MojiNalozi() {
                             <tr key={nalog.id}>
                                 <td>{new Date(nalog.datum).toLocaleDateString('en-US')}</td>
                                 <td>{nalog.opis}</td>
-                                <td>{nalog.izdatoOdStrane}</td>
+                                <td>{nalog.izdatoZa}</td>
                                 <td>{opisiKrivica[nalog.tipPrekrsaja]}</td>
                                 <td>{nalog.jedinicaMere == null ? "/" : nalog.jedinicaMere}</td>
                                 <td>{nalog.vrednost == null ? "/" : nalog.vrednost}</td>
@@ -57,4 +58,4 @@ function MojiNalozi() {
     )
 }
 
-export default MojiNalozi
+export default IzdatiNalozi

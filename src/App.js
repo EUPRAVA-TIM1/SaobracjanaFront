@@ -6,6 +6,8 @@ import RedirectPage from './Pages/RedirectPage.tsx';
 import StanicePage from './Pages/StanicePage.tsx';
 import MojiNalozi from './Pages/MojiNalozi.tsx';
 import KradjaVozila from './Pages/KradjaVozila.tsx';
+import IzdatiNalozi from './Pages/IzdatiNalozi.tsx';
+import KreirajNalog from './Pages/KreirajNalog.tsx';
 
 function App() {
   return (
@@ -31,6 +33,12 @@ function App() {
         path='/PrijaviKradju'
         element={<NavLayout body={<KradjaVozila></KradjaVozila>}></NavLayout>}
         ></Route>
+        <Route
+        path='/IzdatiNalozi'
+        element={<NavLayout body={<IzdatiNalozi></IzdatiNalozi>}></NavLayout>}></Route>
+         <Route
+        path='/IzdajNalog'
+        element={<NavLayout body={<KreirajNalog></KreirajNalog>}></NavLayout>}></Route>
         <Route
           path="/redirekcija/:jwt"
           element={<NavLayout body={<RedirectPage></RedirectPage>}></NavLayout>}>

@@ -24,7 +24,7 @@ export const allCommponents : Commponent[] = [
     {
         title: "Izdati nalozi",
         desc: "Pregledajte sve prekršajne naloge koje ste izdali",
-        url: "/IzdatiNaloz"
+        url: "/IzdatiNalozi"
     },
     {
         title: "Status prosleđenih naloga",
@@ -54,4 +54,6 @@ export const gradjajninCommponents : Commponent[] = [
 export const backend_url = "http://localhost:8002/saobracajna/"
 
 export const storageKey = "milicija-token"
+
+export const file_service_url = 'http://localhost:8001/api/files'
 
