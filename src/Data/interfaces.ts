@@ -32,6 +32,30 @@ export interface PrekrsajniNalog{
     slike: string[]
 }
 
+export interface SaobracjanaDozvola {
+    marka: string;
+    model: string;
+    godinaProizvodnje: number;
+    boja: string;
+    regBroj: string;
+    snagaMotora: number;
+    maksimalnaBrzina: number;
+    brojSedista: number;
+    tezina: number;
+    tipVozila: string;
+    statusRegistracije: string;
+    prijavljenaKradja: string|null;
+}
+
+export interface VozackaDozvola {
+    brojVozackeDozvole: string;
+    kategorijeVozila: string[];
+    datumIzdavavanja: string;
+    datumIsteka: string;
+    brojKaznenihPoena: number;
+    statusVozackeDozvole: string;
+}
+
 export interface PrekrsajniNalogCardProps{
     nalog : PrekrsajniNalog
 }
@@ -44,6 +68,14 @@ export interface CommponentCardProps{
     commponent: Commponent;
 }
 
+export interface VozackaCardProps{
+    vozacka: VozackaDozvola;
+}
+
+export interface SaobracjanaCardProps{
+    saobracajna: SaobracjanaDozvola;
+}
+
   export const opisiKrivica = {
     "POJAS": "Nenošenje sigurnosnog pojasa",
     "PREKORACENJE_BRZINE": "Prekoračenje brzine",
@@ -52,4 +84,31 @@ export interface CommponentCardProps{
     "PRVA_POMOC": "Ne posedovanje prve pomoći",
     "NEMA_VOZACKU": "Neposedovanje vozačke dozvole",
     "REGISTRACIJA": "Neregistrivano vozilo"
+  };
+
+  export const opisiStatusaVozacke = {
+    "AKTIVNA": "Aktivna",
+    "ISTEKLA": "Istekla",
+    "ODUZETA": "Oduzeta",
+    "U_PROCESU_IZDAVANJA": "U procesu izdavanja",
+    "OSTALO": "Ostalo",
+  };
+
+  export const opisiStatusaSaobracjane = {
+    "ODOBRENA": "Aktivna",
+    "ODBIJEA": "Odbijena",
+    "NA_CEKANJU": "U procesu izdavanja",
+  };
+
+  export const opisiTipaVozila = {
+    "PUTNICKO_VOZILO": "Putničko vozilo",
+    "TERETNO_VOZILO": "Teretno vozilo",
+    "AUTOBUS": "Autobus",
+    "KAMION": "Kamion",
+    "MOTORNI_BICIKL": "Motorni bicikl",
+    "SKUTER" : "Skuter",
+    "MOTORNA_TRICIKLA": "Motorni tricikl",
+    "MOTORNA_CETVOTOCIKLA": "Motorni četvorocikl",
+    "PRIKLJUCNO_VOZILO": "Priključno vozilo",
+    "SPECIJALNO_VOZILO": "Specijalno vozilo",
   };

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react'
-import { get, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { backend_url, file_service_url, storageKey } from '../Data/data.ts';
 import { useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
@@ -27,22 +27,6 @@ function KreirajNalog() {
             vrednost:  parseFloat(vrednost),
             slike: [] as string[],
         }
-        // if(getValues("files").length > 0){
-        //     // for(let i = 0; i < getValues("files").length; i++){
-        //     //     const formData = new FormData();
-        //     //     formData.append('file',getValues("files")[i])
-        //     //     axios.post(file_service_url,formData).then(res => {
-        //     //         const data: ResponseData = res.data;
-        //     //         dto.slike.push(data.name)
-        //     //     }).catch(err =>{
-        //     //         alert("Postoji problem sa čuvanjem slika u sistemu pokušajte ponovo kasnije")
-        //     //         return
-        //     //     })
-        //     // }
-        //     postNalog(dto);
-        // }else{
-        //     postNalog(dto);
-        // }
         if (getValues("files").length > 0) {
             const uploadPromises = [] as Promise<void>[];
         
@@ -68,7 +52,6 @@ function KreirajNalog() {
               })
               .catch(() => {
                 alert("Postoji problem sa čuvanjem slika u sistemu pokušajte ponovo kasnije");
-                // At least one upload failed
               });
           } else {
             postNalog(dto);
