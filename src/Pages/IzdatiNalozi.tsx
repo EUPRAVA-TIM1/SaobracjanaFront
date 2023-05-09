@@ -21,12 +21,26 @@ function IzdatiNalozi() {
         })
     }, [])
 
+    const openPdf =  (id) => {
+        axios.get(`${backend_url + "Nalog/" + id}`, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem(storageKey)
+            }
+        }).then(res => {
+            window.open(`${file_service_url+"/"+res.data.name}`, '_blank');
+        }).catch(err => {
+            console.log(err)
+        })
+
+    }
+
     return (
         <>
             <h1 className='mb-5'>Moji prekršajni nalozi:</h1>
             <table className="table table-hover">
                 <thead>
                     <tr>
+                        <th>PDF</th>
                         <th>Datum</th>
                         <th>Opis</th>
                         <th>Izdato za:</th>
@@ -40,6 +54,7 @@ function IzdatiNalozi() {
                     {nalozi.map(nalog => {
                         return (
                             <tr key={nalog.id}>
+                                <td><button className='btn btn-info mx-2' onClick={() => openPdf(nalog.id)}> Otvori</button></td>
                                 <td>{new Date(nalog.datum).toLocaleDateString('en-US')}</td>
                                 <td>{nalog.opis}</td>
                                 <td>{nalog.izdatoZa}</td>
