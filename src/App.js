@@ -9,6 +9,8 @@ import KradjaVozila from './Pages/KradjaVozila.tsx';
 import IzdatiNalozi from './Pages/IzdatiNalozi.tsx';
 import KreirajNalog from './Components/KreirajNalog.tsx';
 import ProveraOsobeMup from './Pages/ProveraOsobeMup.tsx';
+import ProslediNalog from './Pages/ProslediNalog.tsx';
+import IzdatiSudskiNalozi from './Pages/IzdatiSudskiNalozi.tsx';
 
 function App() {
   return (
@@ -48,6 +50,15 @@ function App() {
         path='/ProveraMup'
         element={<NavLayout body={<ProveraOsobeMup></ProveraOsobeMup>} employeeRestricted={true}></NavLayout>}
         >  
+        </Route>
+        <Route
+        path='/ProslediNalog'
+        element={<NavLayout body={<ProslediNalog></ProslediNalog>} employeeRestricted={true}></NavLayout>}
+        ></Route>
+        <Route
+        path='/StatusNaloga'
+        element={<NavLayout body={<IzdatiSudskiNalozi></IzdatiSudskiNalozi>} employeeRestricted={true}></NavLayout>}
+        >
         </Route>
       </Routes>
     </BrowserRouter>

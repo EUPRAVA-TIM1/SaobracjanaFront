@@ -72,6 +72,24 @@ export interface VozackaCardProps{
     vozacka: VozackaDozvola;
 }
 
+export interface KreirajNalogProps{
+    idPrekrsajnog: string,
+    izdatoOdStrane: string,
+    izdatoZa: string,
+    JMBGZapisanog: string,
+}
+
+export interface SudskiNalog{
+    id: number,
+    datum: string,
+    naslov: string,
+    opis: string,
+    optuzeni: string,
+    JMBGoptuzenog: string,
+    statusSlucaja: string,
+    dokumenti: string[],
+}
+
 export interface SaobracjanaCardProps{
     saobracajna: SaobracjanaDozvola;
 }
@@ -99,6 +117,14 @@ export interface SaobracjanaCardProps{
     "ODBIJEA": "Odbijena",
     "NA_CEKANJU": "U procesu izdavanja",
   };
+
+  export const opisiStatusaNalog ={
+    "POSLAT": "Poslat",
+    "U_PROCESU": "Procesuira se",
+    "ODBIJEN": "Odbijen",
+    "PRESUDJEN": "Presuđeno",
+    "POTREBNI_DOKAZI": "Potrebni dodatni dokazi"
+  }
 
   export const opisiTipaVozila = {
     "PUTNICKO_VOZILO": "Putničko vozilo",
