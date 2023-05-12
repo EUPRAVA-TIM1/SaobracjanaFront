@@ -34,6 +34,10 @@ function IzdatiNalozi() {
 
     }
 
+    const izvrsiKaznu = (id) => {
+
+    }
+
     return (
         <>
             <h1 className='mb-5'>Moji prekršajni nalozi:</h1>
@@ -48,6 +52,7 @@ function IzdatiNalozi() {
                         <th>Jedinica mere</th>
                         <th>Vrednost</th>
                         <th>Slike</th>
+                        <th>Kazna izdata:</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,6 +69,7 @@ function IzdatiNalozi() {
                                 <td>{nalog.slike.map((url, index) => {
                                     return (<a key={url} className="mx-1" href={file_service_url + "/" + url} target='_blank'>{"slika" + index}</a>)
                                 })}</td>
+                                <td className='text-center'>{nalog.kaznaIzvrsena ? "DA" : (<button className='btn btn-info mx-2' onClick={() => izvrsiKaznu(nalog.id)}>Izvrsi</button>) }</td>
                             </tr>
                         )
                     })}

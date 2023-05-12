@@ -11,7 +11,7 @@ function ProslediNalog() {
 
     useEffect(() => {
         const jmbg = jwtDecode(localStorage.getItem(storageKey)!).sub
-        axios.get(`${backend_url + "Policajac/Nalozi/" + jmbg}`, {
+        axios.get(`${backend_url + "Policajac/Nalozi/NotIzvrseni/" + jmbg}`, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem(storageKey)
             }

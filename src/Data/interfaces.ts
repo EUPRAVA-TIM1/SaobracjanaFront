@@ -3,7 +3,15 @@ export interface Commponent{
     desc: string,
     url: string
 }
-
+export interface Gradjanin {
+    ime: string,
+    prezime: string,
+    jmbg: string,
+    adresa: string,
+    brojTelefona: string,
+    email: string,
+    opstina: Opstina
+}
 export interface Stanica{
     id : string,
     adresa: string,
@@ -30,6 +38,7 @@ export interface PrekrsajniNalog{
     jedinicaMere: string |null,
     vrednost: string | null,
     slike: string[]
+    kaznaIzvrsena: boolean
 }
 
 export interface SaobracjanaDozvola {
