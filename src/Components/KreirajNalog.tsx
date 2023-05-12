@@ -17,6 +17,9 @@ function KreirajNalog() {
     }
 
     const getGradjanin = async (jmbg) =>{
+        if (jmbg.length < 13) {
+            return "Morate uneti validan jmbg (13 karaktera)"
+        }
         try {
             await axios.get(sso_url + "/User/"+jmbg).then((res) => {
                 const g : Gradjanin = res.data
@@ -24,17 +27,22 @@ function KreirajNalog() {
             })
         } catch (error) {
             setValue("izdatoZa","")
-            if (jmbg.length < 13) {
-                return "Morate uneti validan jmbg (13 karaktera)"
-            } else {
                 return "Ne postoji građanin sa tim JMBG-om"
-            }
         }
     }
 
 
     const onSubmit = async () => {
         const vrednost = getValues("vrednost")
+        if(getValues("tipPrekrsaja") === 'PREKORACENJE_BRZINE' && getValues("jedinicaMere") != "km/h"){
+            alert("Morate izabrati km/h")
+            return
+        }
+        if(getValues("tipPrekrsaja") === 'PIJANA_VOZNJA' && getValues("jedinicaMere") != "promil"){
+            alert("Morate izabrati promil")
+            return
+        };
+
         const dto = {
             opis: getValues("opis"),
             izdatoOdStrane: getValues("izdatoOdStrane"),
@@ -152,7 +160,7 @@ function KreirajNalog() {
                     <p className='fs-5'>Morate izabrati ovo polje</p>
                     <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>}
-                <div className='form-group'>
+                <div className='form-group mb-2'>
                     <label htmlFor='tipPrekrsaja' className='fs-4 mb-2'>Krivično delo:</label>
                     <select className='form-control' {...register('tipPrekrsaja', { required: true })}>
                         <option value='POJAS'>Pojas nije vezan</option>
@@ -164,9 +172,17 @@ function KreirajNalog() {
                         <option value='REGISTRACIJA'>Registracija istekla</option>
                     </select>
                 </div>
+                {errors.jedinicaMere && <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                    <p className='fs-5'>{errors.jedinicaMere.message?.toString()}</p>
+                    <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>}
                 <div className='form-group'>
                     <label htmlFor='jedinicaMere' className='fs-4 mb-2'>Jedinica mere:</label>
-                    <select className='form-control' {...register('jedinicaMere')}>
+                    <select className='form-control' {...register('jedinicaMere',{validate:(jedinica) => {
+                           if((getValues("tipPrekrsaja") === 'PIJANA_VOZNJA' || getValues("tipPrekrsaja") === 'PREKORACENJE_BRZINE') && (jedinica === "" || jedinica === null)) {
+                            return "Morate izabrati vrednost"
+                           }
+                        }})}>
                         <option value="">--</option>
                         <option value='promil'>Promili</option>
                         <option value='km/h'>km/h brzine</option>

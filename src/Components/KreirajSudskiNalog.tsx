@@ -9,6 +9,7 @@ import { KreirajNalogProps } from '../Data/interfaces.ts';
 function KreirajSudskiNalog({ idPrekrsajnog, izdatoOdStrane, JMBGZapisanog, izdatoZa }: KreirajNalogProps) {
     const { register, handleSubmit, getValues, formState: { errors } } = useForm();
     const navigate = useNavigate();
+    
     interface ResponseData {
         name: string;
     }
@@ -25,23 +26,24 @@ function KreirajSudskiNalog({ idPrekrsajnog, izdatoOdStrane, JMBGZapisanog, izda
             dokumenti: [] as string[],
         }
 
+        const uploadPromises = [] as Promise<void>[];
+        
+        const uploadPromise = axios.get(`${backend_url + "Nalog/" + idPrekrsajnog}`, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem(storageKey)
+            }
+        }).then((res) => {
+            const data: ResponseData = res.data;
+            dto.dokumenti.push(data.name);
+        })
+        .catch((err) => {
+            alert("Postoji problem sa čuvanjem pdf u sistemu pokušajte ponovo kasnije");
+            throw err; // Propagate the error to Promise.all
+        });
+
+        uploadPromises.push(uploadPromise);
+
         if (getValues("files").length > 0) {
-            const uploadPromises = [] as Promise<void>[];
-
-            const uploadPromise = axios.get(`${backend_url + "Nalog/" + idPrekrsajnog}`, {
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem(storageKey)
-                }
-            }).then((res) => {
-                    const data: ResponseData = res.data;
-                    dto.dokumenti.push(data.name);
-                })
-                .catch((err) => {
-                    alert("Postoji problem sa čuvanjem slika u sistemu pokušajte ponovo kasnije");
-                    throw err; // Propagate the error to Promise.all
-                });
-            uploadPromises.push(uploadPromise);
-
             for (let i = 0; i < getValues("files").length; i++) {
                 const formData = new FormData();
                 formData.append("file", getValues("files")[i]);
@@ -52,22 +54,21 @@ function KreirajSudskiNalog({ idPrekrsajnog, izdatoOdStrane, JMBGZapisanog, izda
                         dto.dokumenti.push(data.name);
                     })
                     .catch((err) => {
-                        alert("Postoji problem sa čuvanjem slika u sistemu pokušajte ponovo kasnije");
+                        alert("Postoji problem sa čuvanjem fajlova u sistemu pokušajte ponovo kasnije");
                         throw err; // Propagate the error to Promise.all
                     });
                 uploadPromises.push(uploadPromise);
             }
 
+        } 
             Promise.all(uploadPromises)
                 .then(() => {
                     postNalog(dto);
                 })
                 .catch(() => {
-                    alert("Postoji problem sa čuvanjem slika u sistemu pokušajte ponovo kasnije");
+                    alert("Postoji problem sa čuvanjem fajlova u sistemu pokušajte ponovo kasnije");
                 });
-        } else {
             postNalog(dto);
-        }
     }
 
     const postNalog = (dto) => {

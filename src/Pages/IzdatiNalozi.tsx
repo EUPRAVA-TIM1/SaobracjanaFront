@@ -8,6 +8,8 @@ function IzdatiNalozi() {
 
 
     const [nalozi, setNalozi] = useState<PrekrsajniNalog[]>([])
+    const [reload, setReload] = useState(false)
+
     useEffect(() => {
         const jmbg = jwtDecode(localStorage.getItem(storageKey)!).sub
         axios.get(`${backend_url + "Policajac/Nalozi/" + jmbg}`, {
@@ -19,15 +21,15 @@ function IzdatiNalozi() {
         }).catch(err => {
             console.log(err)
         })
-    }, [])
+    }, [reload])
 
-    const openPdf =  (id) => {
+    const openPdf = (id) => {
         axios.get(`${backend_url + "Nalog/" + id}`, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem(storageKey)
             }
         }).then(res => {
-            window.open(`${file_service_url+"/"+res.data.name}`, '_blank');
+            window.open(`${file_service_url + "/" + res.data.name}`, '_blank');
         }).catch(err => {
             console.log(err)
         })
@@ -35,7 +37,13 @@ function IzdatiNalozi() {
     }
 
     const izvrsiKaznu = (id) => {
-
+        axios.put(backend_url + "Policajac/Nalozi/Izvrsi/" + id,null,{headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem(storageKey)
+        }}).then(res => {
+            setReload(!reload)
+        }).catch(err => {
+            alert("Postoji problem sa izvršavanjem kazne pokušajte ponovo kasnije");
+        })
     }
 
     return (
@@ -69,7 +77,7 @@ function IzdatiNalozi() {
                                 <td>{nalog.slike.map((url, index) => {
                                     return (<a key={url} className="mx-1" href={file_service_url + "/" + url} target='_blank'>{"slika" + index}</a>)
                                 })}</td>
-                                <td className='text-center'>{nalog.kaznaIzvrsena ? "DA" : (<button className='btn btn-info mx-2' onClick={() => izvrsiKaznu(nalog.id)}>Izvrsi</button>) }</td>
+                                <td className='text-center'>{nalog.kaznaIzvrsena ? "DA" : (<button className='btn btn-info mx-2' onClick={() => izvrsiKaznu(nalog.id)}>Izvrsi</button>)}</td>
                             </tr>
                         )
                     })}
