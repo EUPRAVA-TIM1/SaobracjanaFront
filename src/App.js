@@ -11,6 +11,7 @@ import KreirajNalog from './Components/KreirajNalog.tsx';
 import ProveraOsobeMup from './Pages/ProveraOsobeMup.tsx';
 import ProslediNalog from './Pages/ProslediNalog.tsx';
 import IzdatiSudskiNalozi from './Pages/IzdatiSudskiNalozi.tsx';
+import ProveraOsobeSud from './Pages/ProveraOsobeSud.tsx';
 
 function App() {
   return (
@@ -49,6 +50,11 @@ function App() {
         <Route 
         path='/ProveraMup'
         element={<NavLayout body={<ProveraOsobeMup></ProveraOsobeMup>} employeeRestricted={true}></NavLayout>}
+        >  
+                </Route>
+        <Route 
+        path='/ProveraSud'
+        element={<NavLayout body={<ProveraOsobeSud></ProveraOsobeSud>} employeeRestricted={true}></NavLayout>}
         >  
         </Route>
         <Route

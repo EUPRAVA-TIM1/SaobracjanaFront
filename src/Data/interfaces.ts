@@ -98,6 +98,12 @@ export interface SudskiNalog{
     statusSlucaja: string,
     dokumenti: string[],
 }
+export interface SudskiSlucaj{
+    datum: string,
+    naslov: string,
+    opis: string,
+    status: string,
+}
 
 export interface SaobracjanaCardProps{
     saobracajna: SaobracjanaDozvola;
@@ -127,7 +133,7 @@ export interface SaobracjanaCardProps{
     "NA_CEKANJU": "U procesu izdavanja",
   };
 
-  export const opisiStatusaNalog ={
+  export const opisiStatusaNalog = {
     "POSLAT": "Poslat",
     "U_PROCESU": "Procesuira se",
     "ODBIJEN": "Odbijen",
