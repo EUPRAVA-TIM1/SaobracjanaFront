@@ -5,7 +5,6 @@ import { useParams,useNavigate } from "react-router-dom";
 import { storageKey } from '../Data/data.ts';
 
 function RedirectPage() {
-    // TODO validate token
     const {jwt} = useParams();
     const navigate = useNavigate();
 

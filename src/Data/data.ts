@@ -52,6 +52,7 @@ export const gradjajninCommponents : Commponent[] = [
 ]
 
 export const backend_url = "http://localhost:8002/saobracajna/"
+export const sso_url = "http://localhost:8000/sso"
 
 export const storageKey = "milicija-token"
 

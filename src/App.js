@@ -7,7 +7,11 @@ import StanicePage from './Pages/StanicePage.tsx';
 import MojiNalozi from './Pages/MojiNalozi.tsx';
 import KradjaVozila from './Pages/KradjaVozila.tsx';
 import IzdatiNalozi from './Pages/IzdatiNalozi.tsx';
-import KreirajNalog from './Pages/KreirajNalog.tsx';
+import KreirajNalog from './Components/KreirajNalog.tsx';
+import ProveraOsobeMup from './Pages/ProveraOsobeMup.tsx';
+import ProslediNalog from './Pages/ProslediNalog.tsx';
+import IzdatiSudskiNalozi from './Pages/IzdatiSudskiNalozi.tsx';
+import ProveraOsobeSud from './Pages/ProveraOsobeSud.tsx';
 
 function App() {
   return (
@@ -35,13 +39,32 @@ function App() {
         ></Route>
         <Route
         path='/IzdatiNalozi'
-        element={<NavLayout body={<IzdatiNalozi></IzdatiNalozi>}></NavLayout>}></Route>
+        element={<NavLayout body={<IzdatiNalozi></IzdatiNalozi>} employeeRestricted={true}></NavLayout>}></Route>
          <Route
         path='/IzdajNalog'
-        element={<NavLayout body={<KreirajNalog></KreirajNalog>}></NavLayout>}></Route>
+        element={<NavLayout body={<KreirajNalog></KreirajNalog>} employeeRestricted={true}></NavLayout>}></Route>
         <Route
           path="/redirekcija/:jwt"
           element={<NavLayout body={<RedirectPage></RedirectPage>}></NavLayout>}>
+        </Route>
+        <Route 
+        path='/ProveraMup'
+        element={<NavLayout body={<ProveraOsobeMup></ProveraOsobeMup>} employeeRestricted={true}></NavLayout>}
+        >  
+                </Route>
+        <Route 
+        path='/ProveraSud'
+        element={<NavLayout body={<ProveraOsobeSud></ProveraOsobeSud>} employeeRestricted={true}></NavLayout>}
+        >  
+        </Route>
+        <Route
+        path='/ProslediNalog'
+        element={<NavLayout body={<ProslediNalog></ProslediNalog>} employeeRestricted={true}></NavLayout>}
+        ></Route>
+        <Route
+        path='/StatusNaloga'
+        element={<NavLayout body={<IzdatiSudskiNalozi></IzdatiSudskiNalozi>} employeeRestricted={true}></NavLayout>}
+        >
         </Route>
       </Routes>
     </BrowserRouter>

@@ -8,32 +8,22 @@ function NavLayout({ body,employeeRestricted }) {
   const location = useLocation();
 
   useEffect( () =>{
-    let canAcess;
     axios.get(backend_url + '/Authorise', {headers: {
       'Authorization' : 'Bearer ' + localStorage.getItem(storageKey)
     }}).then(res => {
-      canAcess = true
+      if(employeeRestricted){
+        axios.get(backend_url + 'Policajac/Authorise', {headers: {
+          'Authorization' : 'Bearer ' + localStorage.getItem(storageKey)
+        }}).then(res => {
+        }).catch( err => {
+            navigate("/Home")
+        })
+      }
     }).catch(err => {
         localStorage.removeItem(storageKey)
         window.location.replace("http://localhost:3000")  
     })
-    if(employeeRestricted){
-      axios.get(backend_url + 'Policajac/Authorise', {headers: {
-        'Authorization' : 'Bearer ' + localStorage.getItem(storageKey)
-      }}).then(res => {
-        if(!canAcess){
-          localStorage.removeItem(storageKey)
-          window.location.replace("http://localhost:3000")  
-        }
-      }).catch( err => {
-        if(!canAcess){
-          localStorage.removeItem(storageKey)
-          window.location.replace("http://localhost:3000")  
-        }else{
-          navigate("/Home")
-        }
-      })
-    }
+    
   },[location])
 
   const logOut= () => {
