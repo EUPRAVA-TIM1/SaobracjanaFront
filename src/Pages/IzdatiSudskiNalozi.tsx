@@ -91,24 +91,13 @@ function IzdatiSudskiNalozi() {
                             <tr key={nalog.id}>
                                 <td>{new Date(nalog.datum).toLocaleDateString('en-US')}</td>
                                 <td>{nalog.naslov}</td>
-                                <td>{nalog.opis}</td>
+                                <td>{nalog.komentar}</td>
                                 <td>{nalog.optuzeni}</td>
                                 <td>{nalog.JMBGoptuzenog}</td>
-                                <td className={`list-group-item ${nalog.statusSlucaja === 'POTREBNI_DOKAZI' ? "text-danger" : ""}`}>{opisiStatusaNalog[nalog.statusSlucaja]}</td>
+                                <td className={`list-group-item ${nalog.StatusPrekrsajnePrijave === 'POTREBNI_DOKAZI' ? "text-danger" : ""}`}>{opisiStatusaNalog[nalog.statusSlucaja]}</td>
                                 <td>{nalog.dokumenti.map((url, index) => {
                                     return (<a key={url} className="mx-1" href={file_service_url + "/" + url} target='_blank'>{"dokument" + index}</a>)
                                 })}</td>
-                                {nalog.statusSlucaja === 'POTREBNI_DOKAZI' && (
-                                    <td>
-                                        <form>
-                                            <div className="mb-3">
-                                                <label htmlFor="files" className="form-label mb-2">Prinesite dodatne dokaze:</label>
-                                                <input {...register("files")} className="form-control mb-4" type="file" id="files" multiple accept="image/*,application/pdf" />
-                                            </div>
-                                            <button type="submit" className="btn btn-primary"  onClick={handleSubmit(() => onSubmit(nalog.id))}>Prosledi</button>
-                                        </form>
-                                    </td>
-                                )}
                             </tr>
                         )
                     })}

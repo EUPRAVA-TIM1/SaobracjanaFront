@@ -96,7 +96,7 @@ export interface SudskiNalog{
     komentar: string,
     optuzeni: string,
     JMBGoptuzenog: string,
-    statusSlucaja: string,
+    StatusPrekrsajnePrijave: string,
     dokumenti: string[],
 }
 export interface SudskiSlucaj{
