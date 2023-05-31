@@ -4,9 +4,9 @@ import { useForm } from 'react-hook-form';
 import { backend_url, file_service_url, storageKey } from '../Data/data.ts';
 import { useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
-import { KreirajNalogProps } from '../Data/interfaces.ts';
+import { KreirajNalogProps, brojeviKrivica } from '../Data/interfaces.ts';
 
-function KreirajSudskiNalog({ idPrekrsajnog, izdatoOdStrane, JMBGZapisanog, izdatoZa }: KreirajNalogProps) {
+function KreirajSudskiNalog({ idPrekrsajnog, izdatoOdStrane, JMBGZapisanog, izdatoZa,prekrsaj }: KreirajNalogProps) {
     const { register, handleSubmit, getValues, formState: { errors } } = useForm();
     const navigate = useNavigate();
     
@@ -17,13 +17,14 @@ function KreirajSudskiNalog({ idPrekrsajnog, izdatoOdStrane, JMBGZapisanog, izda
     const onSubmit = () => {
         const dto = {
             naslov: getValues("naslov"),
-            opis: getValues("opis"),
+            komentar: getValues("opis"),
             izdatoOdStrane: izdatoOdStrane,
             optuzeni: izdatoZa,
             JMBGoptuzenog: JMBGZapisanog,
             JMBGSluzbenika: jwtDecode(localStorage.getItem(storageKey)!).sub,
             statusSlucaja: "KREIRAN",
             dokumenti: [] as string[],
+            prekrsaj: brojeviKrivica[prekrsaj]
         }
 
         const uploadPromises = [] as Promise<void>[];

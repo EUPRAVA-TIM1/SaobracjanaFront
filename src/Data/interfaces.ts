@@ -86,13 +86,14 @@ export interface KreirajNalogProps{
     izdatoOdStrane: string,
     izdatoZa: string,
     JMBGZapisanog: string,
+    prekrsaj: string
 }
 
 export interface SudskiNalog{
     id: number,
     datum: string,
     naslov: string,
-    opis: string,
+    komentar: string,
     optuzeni: string,
     JMBGoptuzenog: string,
     statusSlucaja: string,
@@ -117,6 +118,16 @@ export interface SaobracjanaCardProps{
     "PRVA_POMOC": "Ne posedovanje prve pomoći",
     "NEMA_VOZACKU": "Neposedovanje vozačke dozvole",
     "REGISTRACIJA": "Neregistrivano vozilo"
+  };
+
+  export const brojeviKrivica = {
+    "POJAS": 2, 
+    "PREKORACENJE_BRZINE": 0,
+    "PIJANA_VOZNJA": 1,
+    "TEHNICKA_NEISPRAVNOST": 3,
+    "PRVA_POMOC": 4,
+    "NEMA_VOZACKU": 5,
+    "REGISTRACIJA": 6
   };
 
   export const opisiStatusaVozacke = {

@@ -15,7 +15,10 @@ function ProveraOsobeSud() {
                 'Authorization': 'Bearer ' + localStorage.getItem(storageKey)
             }
         }).then(
-            res => { setSlucajevi(res.data as SudskiSlucaj[]) }
+            res => { if (res.data !== null){
+                setSlucajevi(res.data as SudskiSlucaj[]) 
+            } 
+            }
         ).catch(err => { alert(err.message) })
     }
     return (

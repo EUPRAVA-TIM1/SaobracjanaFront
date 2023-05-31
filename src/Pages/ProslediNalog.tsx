@@ -62,7 +62,7 @@ function ProslediNalog() {
                     </tbody>
                 </table>
                 {nalogSelected  && (<KreirajSudskiNalog idPrekrsajnog={nalogSelected.id} izdatoOdStrane={nalogSelected.izdatoOdStrane} 
-                izdatoZa={nalogSelected.izdatoZa} JMBGZapisanog={nalogSelected.JMBGZapisanog}></KreirajSudskiNalog>)}
+                izdatoZa={nalogSelected.izdatoZa} JMBGZapisanog={nalogSelected.JMBGZapisanog} prekrsaj={nalogSelected.tipPrekrsaja}></KreirajSudskiNalog>)}
             </div>
         </>
     )
