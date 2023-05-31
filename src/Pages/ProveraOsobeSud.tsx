@@ -56,7 +56,7 @@ function ProveraOsobeSud() {
                                 {slucajevi.map(slucaj => {
                                     return (
                                         <tr key={slucaj.naslov + slucaj.datum.toString()}>
-                                            <td>{new Date(slucaj.datum).toLocaleDateString('en-US')}</td>
+                                            <td>{new Date(slucaj.datum.MojDatum).toLocaleDateString('en-US')}</td>
                                             <td>{slucaj.naslov}</td>
                                             <td>{slucaj.opis}</td>
                                             <td>{opisiStatusaNalog[slucaj.status]}</td>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import jwtDecode from "jwt-decode";
-import { SudskiNalog, opisiStatusaNalog } from '../Data/interfaces.ts';
+import { Dokument, SudskiNalog, opisiStatusaNalog } from '../Data/interfaces.ts';
 import axios from 'axios';
 import { file_service_url, backend_url, storageKey } from '../Data/data.ts';
 import { useForm } from 'react-hook-form';
@@ -30,7 +30,7 @@ function IzdatiSudskiNalozi() {
 
     const onSubmit = (id) => {
         const dto = {
-            dokumenti: [] as string[],
+            dokumenti: [] as Dokument[],
         }
 
         if (getValues("files").length > 0) {
@@ -43,7 +43,7 @@ function IzdatiSudskiNalozi() {
                     .post(file_service_url, formData)
                     .then((res) => {
                         const data: ResponseData = res.data;
-                        dto.dokumenti.push(data.name);
+                        dto.dokumenti.push({UrlDokumenta: data.name});
                     })
                     .catch((err) => {
                         alert("Postoji problem sa čuvanjem dokumenta u sistemu pokušajte ponovo kasnije");
@@ -94,9 +94,9 @@ function IzdatiSudskiNalozi() {
                                 <td>{nalog.komentar}</td>
                                 <td>{nalog.optuzeni}</td>
                                 <td>{nalog.JMBGoptuzenog}</td>
-                                <td className={`list-group-item ${nalog.StatusPrekrsajnePrijave === 'POTREBNI_DOKAZI' ? "text-danger" : ""}`}>{opisiStatusaNalog[nalog.statusSlucaja]}</td>
-                                <td>{nalog.dokumenti.map((url, index) => {
-                                    return (<a key={url} className="mx-1" href={file_service_url + "/" + url} target='_blank'>{"dokument" + index}</a>)
+                                <td className={`list-group-item ${nalog.StatusSlucaja === 'POTREBNI_DOKAZI' ? "text-danger" : ""}`}>{opisiStatusaNalog[nalog.StatusSlucaja]}</td>
+                                <td>{nalog.dokumenti.map((dokeument, index) => {
+                                    return (<a key={dokeument.UrlDokumenta} className="mx-1" href={file_service_url + "/" + dokeument.UrlDokumenta} target='_blank'>{"dokument" + index}</a>)
                                 })}</td>
                             </tr>
                         )

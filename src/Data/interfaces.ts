@@ -96,14 +96,23 @@ export interface SudskiNalog{
     komentar: string,
     optuzeni: string,
     JMBGoptuzenog: string,
-    StatusPrekrsajnePrijave: string,
-    dokumenti: string[],
+    StatusSlucaja: string,
+    StatusPrekrsajnePrijave: number,
+    dokumenti: Dokument[],
 }
 export interface SudskiSlucaj{
-    datum: string,
+    datum: Datum,
     naslov: string,
     opis: string,
-    status: string,
+    status: number,
+}
+
+export interface Datum{
+    MojDatum : Date
+}
+
+export interface Dokument{
+    UrlDokumenta: string
 }
 
 export interface SaobracjanaCardProps{
@@ -145,11 +154,9 @@ export interface SaobracjanaCardProps{
   };
 
   export const opisiStatusaNalog = {
-    "POSLAT": "Poslat",
-    "U_PROCESU": "Procesuira se",
-    "ODBIJEN": "Odbijen",
-    "PRESUDJEN": "Presuđeno",
-    "POTREBNI_DOKAZI": "Potrebni dodatni dokazi"
+    0: "Procesuira se",
+    2: "Odbijen",
+    1: "Presuđeno",
   }
 
   export const opisiTipaVozila = {

@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { backend_url, file_service_url, storageKey } from '../Data/data.ts';
 import { useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
-import { KreirajNalogProps, brojeviKrivica } from '../Data/interfaces.ts';
+import { Dokument, KreirajNalogProps, brojeviKrivica } from '../Data/interfaces.ts';
 
 function KreirajSudskiNalog({ idPrekrsajnog, izdatoOdStrane, JMBGZapisanog, izdatoZa,prekrsaj }: KreirajNalogProps) {
     const { register, handleSubmit, getValues, formState: { errors } } = useForm();
@@ -22,8 +22,9 @@ function KreirajSudskiNalog({ idPrekrsajnog, izdatoOdStrane, JMBGZapisanog, izda
             optuzeni: izdatoZa,
             JMBGoptuzenog: JMBGZapisanog,
             JMBGSluzbenika: jwtDecode(localStorage.getItem(storageKey)!).sub,
+            StatusPrekrsajnePrijave: 0,
             statusSlucaja: "KREIRAN",
-            dokumenti: [] as string[],
+            dokumenti: [] as Dokument[],
             prekrsaj: brojeviKrivica[prekrsaj]
         }
 
@@ -35,7 +36,7 @@ function KreirajSudskiNalog({ idPrekrsajnog, izdatoOdStrane, JMBGZapisanog, izda
             }
         }).then((res) => {
             const data: ResponseData = res.data;
-            dto.dokumenti.push(data.name);
+            dto.dokumenti.push({UrlDokumenta: data.name});
         })
         .catch((err) => {
             alert("Postoji problem sa čuvanjem pdf u sistemu pokušajte ponovo kasnije");
@@ -52,7 +53,7 @@ function KreirajSudskiNalog({ idPrekrsajnog, izdatoOdStrane, JMBGZapisanog, izda
                     .post(file_service_url, formData)
                     .then((res) => {
                         const data: ResponseData = res.data;
-                        dto.dokumenti.push(data.name);
+                        dto.dokumenti.push({UrlDokumenta: data.name});
                     })
                     .catch((err) => {
                         alert("Postoji problem sa čuvanjem fajlova u sistemu pokušajte ponovo kasnije");
