@@ -154,9 +154,11 @@ export interface SaobracjanaCardProps{
   };
 
   export const opisiStatusaNalog = {
-    0: "Procesuira se",
-    2: "Odbijen",
-    1: "Presuđeno",
+    "POSLAT": "Poslat",
+    "U_PROCESU": "Procesuira se",
+    "ODBIJEN": "Odbijen",
+    "PRESUDJEN": "Presuđeno",
+    "POTREBNI_DOKAZI": "Potrebni dodatni dokazi"
   }
 
   export const opisiTipaVozila = {
