@@ -19,7 +19,7 @@ function ProveraOsobeSud() {
                 setSlucajevi(res.data as SudskiSlucaj[]) 
             } 
             }
-        ).catch(err => { alert(err.message) })
+        ).catch(err => { console.log(err.message) })
     }
     return (
         <>

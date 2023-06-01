@@ -22,7 +22,7 @@ function KreirajSudskiNalog({ idPrekrsajnog, izdatoOdStrane, JMBGZapisanog, izda
             optuzeni: izdatoZa,
             JMBGoptuzenog: JMBGZapisanog,
             JMBGSluzbenika: jwtDecode(localStorage.getItem(storageKey)!).sub,
-            StatusPrekrsajnePrijave: 0,
+            statusPrekrsajnePrijave: 0,
             statusSlucaja: "KREIRAN",
             dokumenti: [] as Dokument[],
             prekrsaj: brojeviKrivica[prekrsaj]
@@ -70,7 +70,7 @@ function KreirajSudskiNalog({ idPrekrsajnog, izdatoOdStrane, JMBGZapisanog, izda
                 .catch(() => {
                     alert("Postoji problem sa čuvanjem fajlova u sistemu pokušajte ponovo kasnije");
                 });
-            postNalog(dto);
+            // postNalog(dto);
     }
 
     const postNalog = (dto) => {

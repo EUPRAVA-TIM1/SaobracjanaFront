@@ -58,12 +58,14 @@ export interface SaobracjanaDozvola {
 
 export interface VozackaDozvola {
     brojVozackeDozvole: string;
-    kategorijeVozila: string[];
-    datumIzdavavanja: string;
-    datumIsteka: string;
+    datumIzdavavanja: Datum;
+    datumIsteka: Datum;
     brojKaznenihPoena: number;
     statusVozackeDozvole: string;
+    katergorijeVozila: string;
 }
+
+
 
 export interface PrekrsajniNalogCardProps{
     nalog : PrekrsajniNalog
@@ -96,15 +98,15 @@ export interface SudskiNalog{
     komentar: string,
     optuzeni: string,
     JMBGoptuzenog: string,
-    StatusSlucaja: string,
-    StatusPrekrsajnePrijave: number,
+    statusSlucaja: string,
+    statusPrekrsajnePrijave: number,
     dokumenti: Dokument[],
 }
 export interface SudskiSlucaj{
     datum: Datum,
     naslov: string,
     opis: string,
-    status: number,
+    status: string,
 }
 
 export interface Datum{

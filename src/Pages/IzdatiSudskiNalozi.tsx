@@ -94,7 +94,7 @@ function IzdatiSudskiNalozi() {
                                 <td>{nalog.komentar}</td>
                                 <td>{nalog.optuzeni}</td>
                                 <td>{nalog.JMBGoptuzenog}</td>
-                                <td className={`list-group-item ${nalog.StatusSlucaja === 'POTREBNI_DOKAZI' ? "text-danger" : ""}`}>{opisiStatusaNalog[nalog.StatusSlucaja]}</td>
+                                <td className={`list-group-item ${nalog.StatusSlucaja === 'POTREBNI_DOKAZI' ? "text-danger" : ""}`}>{opisiStatusaNalog[nalog.statusSlucaja]}</td>
                                 <td>{nalog.dokumenti.map((dokeument, index) => {
                                     return (<a key={dokeument.UrlDokumenta} className="mx-1" href={file_service_url + "/" + dokeument.UrlDokumenta} target='_blank'>{"dokument" + index}</a>)
                                 })}</td>
