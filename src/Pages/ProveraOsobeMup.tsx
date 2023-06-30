@@ -14,13 +14,13 @@ function ProveraOsobeMup() {
 
 
     const getVozacka = () => {
-        axios.get(backend_url + "Policajac/Provera/VozackaDozvola/Mup/" + getValues("brojVozacke"), {
+        axios.get(backend_url + "Policajac/Provera/VozackaDozvola/Mup/" + getValues("JMBG"), {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem(storageKey)
             }
         }).then(
             res => { setVozacka(res.data as VozackaDozvola) }
-        ).catch(err => { alert(err.message) })
+        ).catch(err => { console.log(err.message) })
     }
 
     const getSaobracjana = () => {
@@ -30,7 +30,7 @@ function ProveraOsobeMup() {
             }
         }).then(
             res => { setSaobracjana(res.data as SaobracjanaDozvola) }
-        ).catch(err => { alert(err.message) })
+        ).catch(err => { console.log(err.message) })
     }
 
     return (
@@ -40,12 +40,12 @@ function ProveraOsobeMup() {
                 <form className='row p-2 mb-3'>
                     <div className="form-group col-auto align-self-center">
                         <div className='row'>
-                            <label className='fs-4 mb-2 col-auto align-self-center' htmlFor="opis">Unesite broj vozačke:</label>
+                            <label className='fs-4 mb-2 col-auto align-self-center' htmlFor="opis">Unesite JMBG:</label>
                             <div className='col-auto align-self-center'>
                                 <input
                                     type="text"
                                     className="form-control border-primary-subtle col-sm-4 align-self-center"
-                                    {...register("brojVozacke", { maxLength: 13 })}
+                                    {...register("JMBG", { maxLength: 13,minLength: 13 })}
                                 />
                             </div>
                         </div>

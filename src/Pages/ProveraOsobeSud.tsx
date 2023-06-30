@@ -15,8 +15,11 @@ function ProveraOsobeSud() {
                 'Authorization': 'Bearer ' + localStorage.getItem(storageKey)
             }
         }).then(
-            res => { setSlucajevi(res.data as SudskiSlucaj[]) }
-        ).catch(err => { alert(err.message) })
+            res => { if (res.data !== null){
+                setSlucajevi(res.data as SudskiSlucaj[]) 
+            } 
+            }
+        ).catch(err => { console.log(err.message) })
     }
     return (
         <>
@@ -53,7 +56,7 @@ function ProveraOsobeSud() {
                                 {slucajevi.map(slucaj => {
                                     return (
                                         <tr key={slucaj.naslov + slucaj.datum.toString()}>
-                                            <td>{new Date(slucaj.datum).toLocaleDateString('en-US')}</td>
+                                            <td>{new Date(slucaj.datum.MojDatum).toLocaleDateString('en-US')}</td>
                                             <td>{slucaj.naslov}</td>
                                             <td>{slucaj.opis}</td>
                                             <td>{opisiStatusaNalog[slucaj.status]}</td>

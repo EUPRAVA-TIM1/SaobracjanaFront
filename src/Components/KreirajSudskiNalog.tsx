@@ -4,9 +4,9 @@ import { useForm } from 'react-hook-form';
 import { backend_url, file_service_url, storageKey } from '../Data/data.ts';
 import { useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
-import { KreirajNalogProps } from '../Data/interfaces.ts';
+import { Dokument, KreirajNalogProps, brojeviKrivica } from '../Data/interfaces.ts';
 
-function KreirajSudskiNalog({ idPrekrsajnog, izdatoOdStrane, JMBGZapisanog, izdatoZa }: KreirajNalogProps) {
+function KreirajSudskiNalog({ idPrekrsajnog, izdatoOdStrane, JMBGZapisanog, izdatoZa,prekrsaj }: KreirajNalogProps) {
     const { register, handleSubmit, getValues, formState: { errors } } = useForm();
     const navigate = useNavigate();
     
@@ -17,13 +17,15 @@ function KreirajSudskiNalog({ idPrekrsajnog, izdatoOdStrane, JMBGZapisanog, izda
     const onSubmit = () => {
         const dto = {
             naslov: getValues("naslov"),
-            opis: getValues("opis"),
+            komentar: getValues("opis"),
             izdatoOdStrane: izdatoOdStrane,
             optuzeni: izdatoZa,
             JMBGoptuzenog: JMBGZapisanog,
             JMBGSluzbenika: jwtDecode(localStorage.getItem(storageKey)!).sub,
+            statusPrekrsajnePrijave: 0,
             statusSlucaja: "KREIRAN",
-            dokumenti: [] as string[],
+            dokumenti: [] as Dokument[],
+            prekrsaj: brojeviKrivica[prekrsaj]
         }
 
         const uploadPromises = [] as Promise<void>[];
@@ -34,7 +36,7 @@ function KreirajSudskiNalog({ idPrekrsajnog, izdatoOdStrane, JMBGZapisanog, izda
             }
         }).then((res) => {
             const data: ResponseData = res.data;
-            dto.dokumenti.push(data.name);
+            dto.dokumenti.push({UrlDokumenta: data.name});
         })
         .catch((err) => {
             alert("Postoji problem sa čuvanjem pdf u sistemu pokušajte ponovo kasnije");
@@ -51,7 +53,7 @@ function KreirajSudskiNalog({ idPrekrsajnog, izdatoOdStrane, JMBGZapisanog, izda
                     .post(file_service_url, formData)
                     .then((res) => {
                         const data: ResponseData = res.data;
-                        dto.dokumenti.push(data.name);
+                        dto.dokumenti.push({UrlDokumenta: data.name});
                     })
                     .catch((err) => {
                         alert("Postoji problem sa čuvanjem fajlova u sistemu pokušajte ponovo kasnije");
@@ -68,7 +70,7 @@ function KreirajSudskiNalog({ idPrekrsajnog, izdatoOdStrane, JMBGZapisanog, izda
                 .catch(() => {
                     alert("Postoji problem sa čuvanjem fajlova u sistemu pokušajte ponovo kasnije");
                 });
-            postNalog(dto);
+            // postNalog(dto);
     }
 
     const postNalog = (dto) => {

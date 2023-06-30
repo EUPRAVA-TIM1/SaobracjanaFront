@@ -1,10 +1,14 @@
 import React from 'react'
 import { VozackaCardProps, opisiStatusaVozacke } from '../Data/interfaces.ts'
+import { unserialize } from 'php-serialize';
 
 function VozackaCard({vozacka} : VozackaCardProps) {
 
     const expired = vozacka.statusVozackeDozvole === 'ISTEKLA' || vozacka.statusVozackeDozvole === 'ODUZETA';
-  return (
+    const matches = vozacka.katergorijeVozila.match(/s:\d+:"([^"]+)"/g);
+    const values = matches!.map((match) => match.match(/"([^"]+)"/)[1]);
+  
+    return (
     <div className={`card ${expired ? 'border-danger' : ''}`}>
       <div className="card-header">
         <h4>Vozačka Dozvola</h4>
@@ -14,13 +18,13 @@ function VozackaCard({vozacka} : VozackaCardProps) {
           <strong>Broj vozačke dozvole:</strong> {vozacka.brojVozackeDozvole}
         </p>
         <p className="card-text">
-          <strong>Kategorije vozila:</strong> {vozacka.kategorijeVozila.join(', ')}
+          <strong>Kategorije vozila:</strong> {values.join(', ')}
         </p>
         <p className="card-text">
-          <strong>Datum izdavanja:</strong> {new Date(vozacka.datumIzdavavanja).toLocaleDateString('en-US')}
+          <strong>Datum izdavanja:</strong> {new Date(vozacka.datumIzdavavanja.MojDatum).toLocaleDateString('en-US')}
         </p>
         <p className="card-text">
-          <strong>Datum isteka:</strong> {new Date(vozacka.datumIsteka).toLocaleDateString('en-US')}
+          <strong>Datum isteka:</strong> {new Date(vozacka.datumIsteka.MojDatum).toLocaleDateString('en-US')}
         </p>
         <p className="card-text">
           <strong>Broj kaznenih poena:</strong> {vozacka.brojKaznenihPoena}

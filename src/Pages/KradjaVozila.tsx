@@ -13,8 +13,8 @@ function KradjaVozila() {
         const dto = {
             prijavio: getValues("prijavio"),
             kontaktTelefon: getValues("kontaktTelefon"),
-            brojRegistracije: getValues("brojRegistracije"),
-            JMBGVlasnika: getValues("JMBGVlasnika")
+            regBroj: getValues("brojRegistracije"),
+            korisnik: getValues("JMBGVlasnika")
         }
         axios.post(backend_url + "KradjaVozila", dto, {
             headers: {
